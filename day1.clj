@@ -7,11 +7,6 @@
 
 (def lines (str/split-lines tallene))
 
-(println "hello")
-
-(defn tonum [astr]
-  (Integer/valueOf astr))
-
 (println (reduce + (map tonum lines)))
 
 (comment
