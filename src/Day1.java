@@ -17,7 +17,7 @@ public class Day1 {
         }
     }
 
-    public Map freqMap = new HashMap();
+    public Map<Integer, Integer> freqMap = new HashMap<Integer, Integer>();
 
     public static void main(String[] args) throws IOException {
         System.out.println("Hello");
@@ -38,25 +38,24 @@ public class Day1 {
     public Resultat findFrequency(int sum, int[] arrayOfNumbers) {
         int currFreq = sum;
         for (int i = 0; i < arrayOfNumbers.length; i++) {
-            currFreq = currFreq + arrayOfNumbers[i];
             int numOfCurrent = lookupFrequency(currFreq);
-            //System.out.println("currFreq: " + currFreq + ". numOfCurrent: " + numOfCurrent);
-            if (numOfCurrent == 2) {
-                //System.out.println("Found solution: " + currFreq);
+            if (numOfCurrent == 1) {
                 return new Resultat(currFreq, true);
-            } else {
-                //System.out.println("Putting in map: " + currFreq + ". Count: " + (numOfCurrent + 1));
-                freqMap.put(currFreq, numOfCurrent + 1);
             }
+            freqMap.put(currFreq, numOfCurrent + 1);
+            int numFromArray = arrayOfNumbers[i];
+            currFreq = currFreq + numFromArray;
         }
         return new Resultat(currFreq, false);
     }
 
     private int lookupFrequency(int frequency) {
-        Object obj = freqMap.get(frequency);
-        if (obj == null) {
+        Integer val = freqMap.get(frequency);
+        if (val == null) {
             return 0;
-        } else return (int)obj;
+        } else {
+            return val;
+        }
     }
 
     public static int[] getArrayOfNumbers() throws IOException {
