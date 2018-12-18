@@ -13,9 +13,6 @@
 
 (def intlist (map tonum lines))
 
-
-
-
 (defn findfreq [alist]
   (loop [currsum 0
          thelist alist
@@ -26,17 +23,29 @@
         currsum
         (recur (+ currsum firstnum) rest (assoc dict currsum 1))))))
 
-(deftest test-one-minus-one
+
+(deftest solution-test
+  (is (= 83173 (findfreq (cycle intlist)))))
+
+
+(deftest test-1
   (is (= 0 (findfreq (cycle [1 -1])))))
 
 (deftest test-2
-  (is (= 10 (findfreq [3 3 4 -2 -4]))))
+  (is (= 10 (findfreq (cycle [3 3 4 -2 -4])))))
+
+(deftest test-3
+  (is (= 5 (findfreq (cycle [-6 3 8 5 -6])))))
+
+(deftest test-4
+  (is (= 14 (findfreq (cycle [7 7 -2 -7 -4])))))
 
 
 
 
 (comment
   ;; Eksempel på test
+
   (deftest entest
     (is (= "ABC" (str/capitalize "abc"))))
 
