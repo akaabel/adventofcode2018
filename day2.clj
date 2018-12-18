@@ -1,4 +1,4 @@
-(ns adventofcode2018
+(ns adventofcode2018-test
   (:require [clojure.java.io :as io])
   (:require [clojure.string :as str])
   (:use clojure.test))
@@ -13,10 +13,11 @@
 
 (def intlist (map tonum lines))
 
-(defn findfreq [alist]
-  (loop [currsum 0
-         thelist alist
-         dict {}]
+(defn findfreq
+  ([alist] (findfreq 0 alist {}))
+  ([currsum 
+    thelist
+    dict]
     (let [[firstnum & rest] thelist
           found? (not= 0 (get dict currsum 0))]
       (if found?
